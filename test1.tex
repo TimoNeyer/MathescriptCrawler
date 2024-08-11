@@ -1,0 +1,127 @@
+
+\documentclass{article}
+\title{Matheskript}
+\usepackage[a4paper, left=10mm, right=10mm, top=10mm, bottom=10mm]{geometry}
+
+%% autoimports
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{amsmath}
+
+
+%% commands
+\newcommand{\CalF}{\mathcal{F}}
+\newcommand{\CalX}{\mathcal{X}}
+\newcommand{\bigO}{\mathcal{O}\mathclose{\left(##1\right)}}
+\newcommand{\bigOSymbol}{\mathcal{O}}
+\newcommand{\Bij}{\mathcal{B}}
+\newcommand{\natnum}{\mathbb{N}}
+\newcommand{\integers}{\mathbb{Z}}
+\newcommand{\rationals}{\mathbb{Q}}
+\newcommand{\realnum}{\mathbb{R}}
+\newcommand{\less}{\lt}
+\newcommand{\modulo}{\; \operatorname{mod} \;}
+\newcommand{\isom}{\cong}
+\newcommand{\qed}{\Box}
+\newcommand{\set}{\{##1 \mid ##2\}}
+\newcommand{\pot}{\mathrm{Pot}}
+\newcommand{\eqnComment}{\underset{{\scriptstyle \text{##1}}}{##2}}
+\newcommand{\ind}{\mathbb{1}\mathclose{\left[##1\right]}}
+\newcommand{\Ew}{\operatorname{E}\mathclose{\left[##1\right]}}
+\newcommand{\Var}{\operatorname{Var}\mathclose{\left[##1\right]}}
+
+
+\begin{document}
+\section{6 Algebra}
+
+\subsection{6.1 Heuristiken für Beweise}
+
+%% content type ['theorem']
+Satz 6.1 [Heuristiken zum Zeigen von ODER].
+	
+		Seien $\varphi$ und $\psi$ Aussagen und wir nehmen an, dass wir $\varphi \vee \psi$ zeigen wollen. Die am häufigsten genutzte Heuristik, um diese Aussage zu zeigen, ist die folgende. Man nehme die Negation einer der Aussagen an, beispielsweise $\neg \varphi$. Dann zeige man die andere, in diesem Fall $\psi$. Dieses Vorgehen entspricht der logischen Umformung $\varphi \vee \psi \equiv \neg \varphi \rightarrow \psi$, man kann statt einer ODER-Aussage immer eine Implikation zeigen.
+
+%% content type ['theorem']
+Satz 6.2 [Fallunterscheidung als Beweisstrategie].
+	
+		Man kann eine Aussage $\varphi$ über eineFallunterscheidungwie folgt zeigen. Man wähle sich zunächst eine passende Aussage $\psi$. Dann zeigt man zunächst $\psi \rightarrow \varphi$, also $\varphi$ unter der Annahme, dass $\psi$ gilt. Danach zeigt man $\neg \psi \rightarrow \varphi$, also $\varphi$ unter der Annahme, dass $\neg \psi$ gilt. Im Aufschrieb hat man eine Zeile “Fall 1: $\psi$” und später eine Zeile “Fall 2: $\neg \psi$”.[Kommentar: Man kann auch eine Fallunterscheidung in mehr als zwei Fälle machen, eventuell mit Unterfällen. Das Geschriebene gilt dabei entsprechend.]
+
+%% content type ['theorem']
+Satz 6.3 [Schlampregel für den Analog-Schluss].
+	
+		Nehmen wir an, wir haben Aussage $A$ mit einem Beweis $X$ gezeigt. Nun wollen wir eine Aussage $A'$ zeigen, der Beweis dafür ist eine geringfügige und von der Schlampregel gedeckte Anpassung des Beweises $X$. Dann können wir diesen Beweis abkürzen, indem wir schreiben “Die Aussage $A'$ folgt analog.”[Kommentar: Genau wie bei der Schlampregel kommt es hier darauf an, dass man ohne Nebenrechnung diese Behauptung verifizieren kann. Die Unterschiede im Beweis sollten also wirklich sehr klein sein.]
+
+%% content type ['theorem']
+Satz 6.4 [Schlampregel für den oBdA-Schluss].
+	
+		Die Abkürzung “o.B.d.A.” steht für “ohne Beschränkung der Allgemeinheit”. Nehmen wir an, wir wollen eine Aussage für alle $x,y \in \realnum$ zeigen. Da gibt es jetzt die zwei Fälle $x \leq y$ und $y \leq x$, die man per Fallunterscheidung einzeln behandeln könnte. Nachdem man den Fall $x \leq y$ gezeigt hat, folgt der Fall $y \leq x$ jedoch vollständig analog, da man die Rollen von $x$ und $y$ im Beweis einfach vertauschen kann. Statt einer Fallunterscheidung schreibt man dann “Wir nehmen o.B.d.A an, dass $x \leq y$” und meint damit, dass der andere Fall durch vertauschen der Rollen analog folgt.
+
+\subsection{6.2 Halbgruppen, Monoide und Gruppen}
+
+%% content type ['definition']
+Definition 6.5 [Magmen und ihre Eigenschaften].
+	Seien $A,B$ Mengen und $\diamond: A \times A \rightarrow B$ eine Funktion. Wir nennen $\diamond$ einezweistellige Operation auf $A$und das Tupel $(A,\diamond)$ einMagma. Wir definieren die folgenden Eigenschaften.Abgeschlossenheit$\forall a,b \in A: a \diamond b \in A$.Assoziativität$\forall a,b,c \in A: (a \diamond b) \diamond c = a \diamond (b \diamond c)$.Neutrales Element $e \in A$ von $A$$\forall a \in A: e \diamond a = a = a \diamond e$.Inverses Element $b \in A$ von $a \in A$Sei $e$ ein neutrales Element von $A$. Dann heißt $b$ das inverse Element von $a$, falls $a \diamond b = e = b \diamond a$ gilt.Kommutativität$\forall a,b \in A: a \diamond b = b \diamond a$.Wir nenne das Tupel $(A,\diamond)$ einMagmafalls $(A,\diamond)$ abgeschlossen ist.
+	Wir nennen ein Magma eineHalbgruppe(engl.: semi group), falls es die Eigenschaft der Assoziativität hat. Wir nennen eine Halbgruppe einMonoid, falls es ein neutrales Element gibt. Wir nennen ein Monoid eineGruppe(engl.: group), falls jedes Element ein Inverses hat. Wir benutzen das Adjektivkommutativfür beliebige solche Strukturen, falls sie die Eigenschaft der Kommutativität erfüllen. Eine kommutative Verknüpfung nennt man auchabelsch, nach dem norwegischen Mathematiker Nils Henrik Abel.Das Inverse eines Elements $a$ schreiben wir gerne als $a^{-1}$ (oder als $-a$, falls die Verknüpfung mit $+$ bezeichnet wird).
+
+%% content type ['theorem']
+Satz 6.6 [Beispiele für Strukturen].
+	
+		Es gelten die folgenden Aussagen.$(\natnum,+)$ ist ein kommutatives Monoid mit neutralem Element $0$.$(\integers,+)$ ist eine kommutative Gruppe mit neutralem Element $0$.$(\rationals,+)$ ist eine kommutative Gruppe mit neutralem Element $0$.$(\realnum,+)$ ist eine kommutative Gruppe mit neutralem Element $0$.$(\natnum \setminus \{0\},\cdot)$ ist eine kommutatives Monoid mit neutralem Element $1$.$(\integers \setminus \{0\},\cdot)$ ist eine kommutatives Monoid mit neutralem Element $1$.$(\rationals \setminus \{0\},\cdot)$ ist eine kommutative Gruppe mit neutralem Element $1$.$(\rationals_{>0},\cdot)$ ist eine kommutative Gruppe mit neutralem Element $1$.$(\realnum \setminus \{0\},\cdot)$ ist eine kommutative Gruppe mit neutralem Element $1$.$(\realnum_{>0},\cdot)$ ist eine kommutative Gruppe mit neutralem Element $1$.
+
+%% content type ['definition']
+Definition 6.7 [Subtraktion und Division].
+	Wenn wir $a-b$ schreiben, dann meinen wir damit $a+(-b)$, wobei $-b$ das additiv Inverse von $b$ in der entsprechenden Gruppe ist (analog für Division). Wir nutzen trotzdem die Kurzschreibweise $a-b$ (als “syntactic sugar”).
+
+%% content type ['theorem']
+Satz 6.11 [Struktur auf Funktionsmengen].
+	
+		Sei $A$ eine Menge. Sei $\CalF_A$ die Menge aller Funktionen $f\colon A \rightarrow A$. Sei $\Bij_A$ die Menge allerbijektivenFunktionen $f\colon A \rightarrow A$ (auch genannt die Menge allerPermutationenvon $A$). Dann gelten die folgenden Aussagen.$(\CalF_A,\circ)$ ist ein Monoid.$(\Bij_A,\circ)$ ist eine Gruppe.
+
+%% content type ['theorem']
+Satz 6.15 [Argumentweise Operation auf Funktionen].
+	
+		Sei $(G,\diamond)$ ein Magma und $A$ eine Menge. Sei $F$ die Menge aller Funktionen $f\colon A \rightarrow G$. Wir definieren eine Addition auf $F$ so, dass für $f,g \in F$ und alle $a \in A$ gilt $(f\diamond g)(a) = f(a) \diamond g(a)$. Mit anderen Worten, $f \diamond g$ ist eine neue Funktion, welche jedes $a \in A$ auf die Komposition der einzelnen Funktionswerte abbildet.Dann ist $(F,\diamond)$ ein Magma. Weiterhin “erbt” $(F,\diamond)$  Eigenschaften von $(G,\diamond)$: Falls $(G,\diamond)$ assoziativ ist, so auch $(F,\diamond)$; analog für die Existenz eines neutralen Elements, die Existenz von Inversen und die Kommutativität.Man kann Tupel $(a_1,…, a_n) \in G^n$ auch als Funktionen auffassen, in diesem Fall wird $i \in [n]$ abgebildet auf $a_i$. Die Menge aller $f\colon [n] \rightarrow G$ ist in diesem Sinn die Menge aller $n$-Tupel mit Komponenten aus $G$; deshalb kann man diese argumentweise Operation auf Funktionen auch auf Tupel anwenden.
+
+\subsection{6.3 Ein paar Sätze zu Strukturen}
+
+%% content type ['theorem']
+Satz 6.16 [Eindeutigkeit des neutralen Elements].
+	
+		Sei $(A,\diamond)$ ein Monoid und $e_0$, $e_1$ zwei neutrale Elemente des Monoids. Dann gilt $e_0=e_1$.
+
+%% content type ['theorem']
+Satz 6.17 [Eindeutigkeit inverser Elemente].
+	
+		Sei $(G,\diamond)$ eine Gruppe und $e$ das neutrale Elemente der Gruppe. Dann hat jedes Element $g \in G$ ein eindeutiges inverses Element bezüglich $\diamond$.
+
+%% content type ['theorem']
+Satz 6.18 [Inverse von Inversen].
+	
+		Sei $(G,\diamond)$ eine Gruppe und seien $a,b \in G$.  Wenn $a$ das Inverse von $b$ ist, dann ist $b$ das Inverse von $a$. Insbesondere gilt, für alle $g \in G$, $(g^{-1})^{-1}=g$.
+
+%% content type ['theorem']
+Satz 6.19 [Inverse von verknüpften Elementen].
+	
+		Sei $(A,\cdot)$ eine Gruppe mit neutralem Element $1_A$ und seien $a,b \in A$. Dann ist $b^{-1} a^{-1}$ das Inverse von $a b$, in Zeichen: $(a b)^{-1} = b^{-1} a^{-1}$.
+
+\subsection{6.4 Ringe und Körper}
+
+%% content type ['definition']
+Definition 6.20 [Ringe und Körper].
+	Sei $A$ eine Menge und $+$ und $\cdot$ zwei Operationen auf $A$. Dann ist $(A,+,\cdot)$ einRingfalls $(A,+)$ eine kommutative Gruppe mit einem neutralen Element $0$ ist und $(A, \cdot)$ eine Halbgruppe, sowie die folgenden Rechenregeln gelten (Distributivgesetze).$\forall a,b,c \in A: (a+b)\cdot c = a\cdot c + b \cdot c$.$\forall a,b,c \in A: a\cdot(b+c) = a\cdot b + a \cdot c$.Falls zusätzlich $(A \setminus \{0\},\cdot)$ eine kommutative Gruppe ist, so nennen wir $(A,+,\cdot)$ einenKörper(engl.: field). Das neutrale Element von $(A,+)$ schreiben wir als $0_A$ (oder auch einfach als $0$); falls $(A,+,\cdot)$ ein Körper ist, so schreiben wir das neutrale Element von $(A \setminus \{0\},\cdot)$ als $1_A$ (oder auch einfach als $1$).
+
+%% content type ['theorem']
+Satz 6.21 [Beispiele für Ringe und Körper].
+	
+		Es gelten die folgenden Aussagen.$(\integers,+,\cdot)$ ist ein Ring.$(\rationals,+,\cdot)$ ist ein Körper.$(\realnum,+,\cdot)$ ist ein Körper.
+
+%% content type ['theorem']
+Satz 6.22 [Rechenregeln für Ringe].
+	
+		Sei $(R,+,\cdot)$ ein Ring mit additiv neutralem Element $0$. Dann gelten die folgenden Aussagen.Für alle $a \in R$, $0a = 0 = a0$.Für alle $a,b \in R$, $a(-b) = -(ab)$ (mit anderen Worten: $ab$ ist das additiv Inverse von $a \cdot (-b)$).Für alle $a,b \in R$, $(-a)b = -(ab)$.Für alle $a,b \in R$, $(-a)(-b) = ab$.Falls $(R,\cdot)$ ein neutrales Element $1$ hat, dann gilt, für alle $a \in R$, $-a = (-1)a$.
+
+
+\end{document}
+
+
+%% This file is autogenerated by scriptfetch
